@@ -32,28 +32,32 @@ const Login = () => {
     return (
         <div className="login-page-main">
             <div className="login-div">
-                <div className="title">Login Page</div>
-                <div className="form">
-                    <div className="email">
-                        <label>Email</label>
+                <div className="login-form">
+                    <span className="title">Login</span>
+
+                    <div className="email-div">
                         <input
                             type="email"
                             name="email"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
+                            className="input-box"
+                            placeholder="Enter your email"
                         />
+
                     </div>
-                    <div className="pass">
-                        <label>Password</label>
+                    <div className="password-div">
                         <input
                             type="password"
                             name="password"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
+                            placeholder="Enter your password"
+                            className="input-box"
                         />
                     </div>
                     <div>
-                        <button onClick={onLogin} className="btn btn-">
+                        <button onClick={onLogin} className="login-btn">
                             {loading ? "Logging you in..." : "Login"}
                         </button>
                     </div>

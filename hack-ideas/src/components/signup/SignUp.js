@@ -31,39 +31,42 @@ const SignUp = () => {
     }, [])
 
     return (
-        < div className="login-page-main" >
-            <div className="login-div">
-                <div className="title">SignUp Page</div>
-                <div className="form">
+        < div className="signup-page-main" >
+            <div className="signup-div">
+                <div className="title">SignUp</div>
+                <div className="signup-form">
                     <div className="email">
-                        <label>Username</label>
                         <input
-                            type="name"
+                            type="username-div"
                             name="name"
                             value={name}
                             onChange={e => setName(e.target.value)}
+                            placeholder="Enter your name"
+                            className="input-box"
                         />
                     </div>
-                    <div className="email">
-                        <label>Email</label>
+                    <div className="email-div">
                         <input
                             type="email"
                             name="email"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
+                            placeholder="Enter your email"
+                            className="input-box"
                         />
                     </div>
-                    <div className="pass">
-                        <label>Password</label>
+                    <div className="password-div">
                         <input
                             type="password"
                             name="password"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
+                            placeholder="Enter your email"
+                            className="input-box"
                         />
                     </div>
                     <div>
-                        <button onClick={onSignUp} className="btn btn-">
+                        <button onClick={onSignUp} className="signup-btn">
                             {loading ? 'Creating user...' : "SignUp"}
                         </button>
                     </div>

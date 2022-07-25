@@ -1,23 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signOut } from 'firebase/auth'
-import './Dashboard.css'
+import { getAuth, signOut } from 'firebase/auth';
+import TopNavBar from './TopNavBar'
+import ChallengeContent from "./ChallengeContent"
+import './Dashboard.css';
 
 const Dashboard = () => {
     const auth = getAuth();
     const user = auth.currentUser;
     const history = useNavigate();
 
-    const logout = () => {
-        // localStorage.removeItem("token")
-        // history("/")
-        signOut(auth)
-            .then(() => {
-                localStorage.removeItem("token")
-                history("/")
-            })
-            .catch((e) => alert(e.message))
-    }
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -26,18 +18,10 @@ const Dashboard = () => {
         }
     }, [])
 
-
-
     return (
-        < div className="login-page-main" >
-            <div className="login-div">
-                <p>{user && user.displayName}</p>
-                <div>
-                    <button onClick={logout} className="">
-                        Logout
-                    </button>
-                </div>
-            </div>
+        <div>
+            <TopNavBar userName={user ? user.displayName : null} />
+            <ChallengeContent />
         </div>
     )
 }
