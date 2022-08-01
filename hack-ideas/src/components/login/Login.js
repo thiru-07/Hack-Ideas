@@ -4,13 +4,20 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import './Login.css'
 
 const Login = () => {
-
+    /**
+     * Login component that displayes login page of the application.
+     */
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useNavigate();
 
     const onLogin = () => {
+        /**
+         * Method to log in user using user credentials.
+         * Authenticates the user email Id , password and then redirects the user to Dashboard .
+         * Storing the Token ID in the local storage to handle page refreshes.
+         */
         setLoading(true);
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)

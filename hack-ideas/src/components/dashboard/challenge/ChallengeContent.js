@@ -1,12 +1,15 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { Button, Modal, Table, Popconfirm, Radio, Input, Tooltip } from 'antd';
 import { getAuth } from 'firebase/auth';
-import { getDb } from '../../firebase/firebase';
-import { collection, deleteDoc, doc, getDocs, getDoc, query, setDoc, where, updateDoc } from 'firebase/firestore';
+import { getDb } from '../../../firebase/firebase';
+import { collection, deleteDoc, doc, getDocs, getDoc, query, setDoc, updateDoc } from 'firebase/firestore';
 import { DeleteOutlined, LikeOutlined } from '@ant-design/icons';
-import './Dashboard.css';
+import './Challenge.css';
 
 const ChallengeContent = () => {
+    /**
+     *  Challenge table component with required methods and UI tags.
+     */
     const auth = getAuth();
     const user = auth.currentUser;
     const [challenges, setChallenges] = useState([]);
@@ -19,6 +22,10 @@ const ChallengeContent = () => {
 
 
     const fetchChallenges = useCallback(async () => {
+        /**
+         * Asynchronous Function to get the challenges from Firestore whenever the user is changed.
+         * useCallback hook is used in order to optimize the performance of the application.
+         */
         if (user && user.uid) {
             const db = getDb();
             const q = query(collection(db, "challenges"))
@@ -35,13 +42,17 @@ const ChallengeContent = () => {
             }
         }
 
-    }, [user, upVotedUsers])
+    }, [user])
 
     useEffect(() => {
         fetchChallenges()
     }, [user])
 
     const addChallenge = async () => {
+        /**
+         * Asynchronous Function to add the challenge to the Firestore and local state.
+         * This Method fetchs the required collection from the Firestore and adds the new challenge to the Firestore.
+         */
         const db = getDb();
         const newTaskRef = doc(collection(db, "challenges"));
         await setDoc(newTaskRef, {
@@ -58,6 +69,11 @@ const ChallengeContent = () => {
     }
 
     const addUpVote = async (id) => {
+        /**
+         * Asynchronous Function to add upvotes to a challenge.
+         * This Method fetchs the upvoted challenge from the firestore using its ID and updates the upvotes.
+         * @param {string} id - Challenge ID
+         */
         const db = getDb();
         const docRef = doc(db, "challenges", id);
         const docSnap = await getDoc(docRef);
@@ -65,7 +81,7 @@ const ChallengeContent = () => {
         if (docSnap.exists()) {
             const existingUpvotes = docSnap.data().upVotes
             const arr = [...existingUpvotes];
-            if (existingUpvotes.includes(user.displayName)) {
+            if (existingUpvotes.includes(user.displayName)) { //Checking if the user has already upvoted and removing it if upvoted.
                 const elementInd = arr.indexOf(user.displayName)
                 arr.splice(elementInd, 1);
             }
@@ -79,9 +95,14 @@ const ChallengeContent = () => {
 
 
     const deleteChallenge = async (id) => {
+        /**
+         * Asynchronous Function to delete a challenge .
+         * This Method fetchs the challenge to be deleted from the Firestore using the challenge ID and removes it.
+         * @param {string} id - Challenge ID
+         */
         const db = getDb();
         try {
-            const result = await deleteDoc(doc(db, "challenges", id));
+            await deleteDoc(doc(db, "challenges", id));
             fetchChallenges()
         }
         catch (e) {
@@ -90,6 +111,9 @@ const ChallengeContent = () => {
     }
 
     const columns = [
+        /**
+         * Array of objects required by the Challenge Table UI to display the column headers and its features.
+         */
         {
             title: 'Challenge',
             dataIndex: 'name',

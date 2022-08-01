@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './components/login/Login';
 import SignUp from './components/signup/SignUp';
-import Dashboard from './components/dashboard/Dashboard';
+import Dashboard from './components/dashboard/dashboard/Dashboard';
 import { getAuth, onAuthStateChanged } from '@firebase/auth';
 import { initializeFirbase } from './firebase/firebase';
 import 'antd/dist/antd.min.css';

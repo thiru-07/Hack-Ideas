@@ -1,0 +1,20 @@
+.challenge-input-box {
+    margin-left: 50px !important;
+    width: 70% !important;
+    margin-bottom:5px !important;
+}
+
+.challenge-input-box-desc{
+    margin-left: 3px  !important;
+    width: 70% !important;
+    margin-bottom:5px !important;
+}
+
+.tag-div {
+    margin-left: 50px  !important;
+}
+
+.title-modal-div {
+    font-size: 15px;
+    margin: 5px;
+}
