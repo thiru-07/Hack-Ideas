@@ -161,7 +161,7 @@ const ChallengeContent = () => {
                             <Button type="primary" shape="circle" icon={<DeleteOutlined />} />
                         </Popconfirm>
                         <Tooltip title={upVotedUsers.length !== 0 ? (upVotedUsers.map((each, i) => (each + "\n"))) : "No Upvotes"}>
-                            <Button type="primary" shape="circle" icon={<LikeOutlined style={{ backgroundColor: "green" }} onClick={() => addUpVote(record.key)} />}></Button>
+                            <Button type="primary" shape="circle" icon={<LikeOutlined onClick={() => addUpVote(record.key)} />}></Button>
                         </Tooltip>
                     </>
                 ) : null,
